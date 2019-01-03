@@ -18,7 +18,7 @@ var server = http.createServer(async function (req, res) {
 
 async function cqtv3(req, res) {
   var headers = {
-    'Referer': 'http://www.cbg.cn/zbpd/',
+    'Referer': 'http://www.cbg.cn/1ive/',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3610.2 Safari/537.36'
   };
   if (req.url.indexOf('m3u8') > 0) {
