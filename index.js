@@ -11,6 +11,28 @@ var server = http.createServer(async function (req, res) {
     } catch (e) {
       console.log(e)
     }
+  } else if (req.url.indexOf("/sctv4") > -1) {
+    var headers = {
+      'Accept-Encoding': 'gzip, deflate',
+      'Accept-Language': 'zh-CN,zh;q=0.9',
+      'Referer': 'http://www.sctv.com/live/video/SCTV4/',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3610.2 Safari/537.36',
+      "X-Requested-With": 'ShockwaveFlash/32.0.0.101'
+    };
+    var url = req.url;
+    if (url.indexOf('m3u8') > -1) {
+      var m3u8 = 'http://m3u8.sctv.com/tvlive/SCTV4/index.m3u8';
+      var content = (await got.get(m3u8, {
+        headers: headers
+      })).body
+      return res.end(content)
+    } else if (url.indexOf('.ts') > -1) {
+      var file = url.substr(url.indexOf('2-'))
+      var stream_3_url = 'http://m3u8.sctv.com/tvlive/SCTV4/' + file
+      console.log('ts file:' + stream_3_url)
+      got.stream(stream_3_url, { headers: headers }).pipe(res);
+      return
+    }
   } else {
     res.end('not found')
   }
