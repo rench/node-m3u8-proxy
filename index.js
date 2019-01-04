@@ -25,6 +25,7 @@ var server = http.createServer(async function (req, res) {
       var content = (await got.get(m3u8, {
         headers: headers
       })).body
+      console.log('get m3u8 file:'+m3u8)
       return res.end(content)
     } else if (url.indexOf('.ts') > -1) {
       var file = url.substr(url.indexOf('2-'))
@@ -59,6 +60,7 @@ async function cqtv3(req, res) {
     }
     var body = (await got.get(m3u8_url, { headers: headers })).body
     body = body.replace('http://sjlivecdnx.cbg.cn/1ive/stream_3.php', 'stream_3.php')
+    console.log('get m3u8 file:'+m3u8_url)
     return res.end(body)
   } else if (req.url.indexOf('stream') > 0) {
     var stream_3_url = 'http://sjlivecdnx.cbg.cn/1ive/' + req.url.substr(req.url.lastIndexOf('/'))
