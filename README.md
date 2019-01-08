@@ -1,5 +1,18 @@
-#### proxy for hls
+node-m3u8-proxy is a node package to proxy hls stream,depending on your needs, you can run node package on routers, development boards, personal computers and other devices that can run nodes.
 
+the functions currently implemented are as follows
+1. fetch orignal m3u8 file data
+2. proxy ts file data with customizing http headers
+
+# Installation & Run
+```
+git clone https://github.com/rench/node-m3u8-proxy.git
+npm i --verbose
+node index.js
+```
+> If your device does not have NPM commands, you can copy node_modules to your device after installing the dependencies on the device that can run NPM commands.
+
+# Address and Channel Menu After Proxy
 ```
 四川卫视HD,http://localhost:5050/sctv0/index.m3u8
 四川文化HD,http://localhost:5050/sctv2/index.m3u8
@@ -33,3 +46,7 @@
 重庆少儿,http://localhost:5050/cqtv19/index.m3u8
 重庆手持,http://localhost:5050/cqtv20/index.m3u8
 ```
+> Replace the `localhost` string above with the actual IP address of your device
+
+# Change Logs
+- 2019-1-8 add cqtv/sctv/cdtv(0.0.1)
