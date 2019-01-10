@@ -1,11 +1,11 @@
 {
   "name": "m3u8-proxy",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "bin": {
-    "node-m3u8-proxy": "index.js",
-    "m3u8-proxy": "index.js"
+    "node-m3u8-proxy": "./bin/m3u8-proxy",
+    "m3u8-proxy": "./bin/m3u8-proxy"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
