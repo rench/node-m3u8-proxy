@@ -6,7 +6,7 @@
   "bin": {
     "node-m3u8-proxy": "index.js",
     "m3u8-proxy": "index.js"
-  }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
