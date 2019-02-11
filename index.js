@@ -183,15 +183,18 @@ async function sctv(req, res) {
     while (result = reg.exec(content)) {
       list.push(result[0])
     }
-
     if (sctv_cache.length == 0) {
       sctv_cache = ['', '', '']
     }
     var cache_count = sctv_cache.length
-    for (var i = list.length - 1; i--; i >= 0) {
+    for (var i = list.length - 1; i >= 0; i--) {
       var ts = list[i]
       var cache_index = --cache_count
       if (cache_index < 0) {
+        break;
+      }
+      var cache_ts = sctv_cache[cache_index]
+      if (cache_ts && cache_ts > ts) {
         break;
       }
       sctv_cache[cache_index] = ts
