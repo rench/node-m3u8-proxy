@@ -95,6 +95,8 @@ const cqtv_map = {
   },
 }
 
+let sctv_cache = []
+
 var server = http.createServer(async function (req, res) {
   if (req.url.indexOf('/cqtv') > -1) {
     try {
@@ -118,6 +120,8 @@ var server = http.createServer(async function (req, res) {
     res.end('not found')
   }
 });
+server.keepAliveTimeout = 300 * 1000
+
 /**
  * proxy cdtv hls flv
  * @param {*} req 
@@ -173,7 +177,36 @@ async function sctv(req, res) {
     var content = (await got.get(m3u8, {
       headers: headers
     })).body
-    return res.end(content)
+
+    var reg = /(.*).ts/ig
+    var list = []
+    while (result = reg.exec(content)) {
+      list.push(result[0])
+    }
+
+    if (sctv_cache.length == 0) {
+      sctv_cache = ['', '', '']
+    }
+    var cache_count = sctv_cache.length
+    for (var i = list.length - 1; i--; i >= 0) {
+      var ts = list[i]
+      var cache_index = --cache_count
+      if (cache_index < 0) {
+        break;
+      }
+      sctv_cache[cache_index] = ts
+    }
+
+    var m3u8_str = '#EXTM3U\r\n#EXT-X-VERSION:3\r\n#EXT-X-TARGETDURATION:10\r\n'
+    for (var i in sctv_cache) {
+      var ts = sctv_cache[i]
+      if (i == 0) {
+        m3u8_str += '#EXT-X-MEDIA-SEQUENCE:' + ts.substr(ts.indexOf('-') + 1, ts.indexOf('.ts') - 2) + '\r\n'
+      }
+      m3u8_str += '#EXTINF:10.000, \r\n'
+      m3u8_str += ts + '\r\n'
+    }
+    return res.end(m3u8_str)
   } else if (url.indexOf('.ts') > -1) {
     var file = url.substr(url.lastIndexOf('/') + 1)
     var ts_file_url = 'http://m3u8.sctv.com/tvlive/' + index + '/' + file
