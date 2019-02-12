@@ -143,7 +143,7 @@ async function cdtv(req, res) {
   console.log('get flv file:' + flv)
   var content = (await got.get(flv, {
     headers: headers
-  })).body
+  }).on('error', err => { console.log(err) })).body
   res.writeHead(302, { 'Location': content })
   console.log('redirect flv_url:' + content)
   return res.end()
@@ -176,15 +176,14 @@ async function sctv(req, res) {
     console.log('get m3u8 file:' + m3u8)
     var content = (await got.get(m3u8, {
       headers: headers
-    })).body
-
+    }).on('error', err => { console.log(err) })).body
     var reg = /(.*).ts/ig
     var list = []
     while (result = reg.exec(content)) {
       list.push(result[0])
     }
     if (sctv_cache.length == 0) {
-      sctv_cache = ['', '', '']
+      sctv_cache = ['', '', '', '', '', '']
     }
     var cache_count = sctv_cache.length
     for (var i = list.length - 1; i >= 0; i--) {
@@ -214,7 +213,11 @@ async function sctv(req, res) {
     var file = url.substr(url.lastIndexOf('/') + 1)
     var ts_file_url = 'http://m3u8.sctv.com/tvlive/' + index + '/' + file
     console.log('get ts   file:' + ts_file_url)
-    got.stream(ts_file_url, { headers: headers }).pipe(res);
+    try {
+      got.stream(ts_file_url, { headers: headers, retry: 3 }).on('error', err => { console.log(err) }).pipe(res);
+    } catch (e) {
+      console.error(e)
+    }
     return
   }
 }
@@ -247,7 +250,7 @@ async function cqtv(req, res) {
     if (map.last_timestamp == -1 || new Date().valueOf() - map.last_timestamp > 1000 * 60) {
       var content = (await got.get(m3u8, {
         headers: headers
-      })).body;
+      }).on('error', err => { console.log(err) })).body;
       var url = content.replace(/.*jQuery\(\"/, '')
         .replace('\")', '')
         .replace(/\\/ig, '');
@@ -267,7 +270,7 @@ async function cqtv(req, res) {
   } else if (req.url.indexOf('media') > 0) { //hls ts file
     var ts_url = map.ts_url_prefix + req.url.substr(req.url.lastIndexOf('/') + 1)
     console.log('get ts   file:' + ts_url)
-    got.stream(ts_url, { headers: headers }).pipe(res);
+    got.stream(ts_url, { headers: headers, retry: 3 }).on('error', err => { console.log(err) }).pipe(res);
     return
   }
 }

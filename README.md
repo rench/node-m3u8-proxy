@@ -49,5 +49,6 @@ node index.js
 > Replace the `localhost` string above with the actual IP address of your device
 
 # Change Logs
+- 2019-2-12 fix bug,hand error
 - 2019-2-11 change cdtv proxy channel suffix,cache sctv proxy channel latest three ts file(0.0.6)
 - 2019-1-8 add cqtv/sctv/cdtv(0.0.1)
