@@ -230,7 +230,8 @@ async function sctv(req, res) {
  */
 async function cqtv(req, res) {
   var headers = {
-    'Referer': 'http://www.cbg.cn/1ive/',
+    //'Referer': 'http://www.cbg.cn/1ive/',
+    'Referer': 'http://www.cbg.cn/live/index.shtml',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3610.2 Safari/537.36'
   };
   var url = req.url;
@@ -259,6 +260,7 @@ async function cqtv(req, res) {
       map.ts_url_prefix = url.substr(0, url.lastIndexOf('/') + 1)
     }
     var body = (await got.get(map.m3u8_url, { headers: headers })).body
+    console.log('body')
     body = body.replace('http://sjlivecdnx.cbg.cn/1ive/stream_' + index + '.php', 'stream_' + index + '.php')
     console.log('get m3u8 file:' + map.m3u8_url)
     return res.end(body)
