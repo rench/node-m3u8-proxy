@@ -14,6 +14,7 @@ node index.js
 ```
 npm i m3u8-proxy --g
 node-m3u8-proxy
+```
 
 > If your device does not have NPM commands, you can copy node_modules to your device after installing the dependencies on the device that can run NPM commands.
 
