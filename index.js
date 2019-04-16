@@ -139,13 +139,17 @@ async function cdtv(req, res) {
   var url = req.url
   var index = url.substr(url.lastIndexOf('/') - 1, 1)
   index = cdtv_map[index] ? cdtv_map[index] : "1"
-  var flv = 'http://www.cditv.cn/api.php?op=live&type=live&catid=192&id=' + index
-  console.log('get flv file:' + flv)
+  var type = 'type=live'
+  if (url.indexOf('m3u8') > -1) {
+    type = 'videotype=m3u8'
+  }
+  var flv = 'http://www.cditv.cn/api.php?op=live&' + type + '&catid=192&id=' + index
+  console.log('get file:' + flv)
   var content = (await got.get(flv, {
     headers: headers
   }).on('error', err => { console.log(err) })).body
   res.writeHead(302, { 'Location': content })
-  console.log('redirect flv_url:' + content)
+  console.log('redirect video_url:' + content)
   return res.end()
 }
 

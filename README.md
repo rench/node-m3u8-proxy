@@ -10,6 +10,11 @@ git clone https://github.com/rench/node-m3u8-proxy.git
 npm i --verbose
 node index.js
 ```
+# Global Installation
+```
+npm i m3u8-proxy --g
+node-m3u8-proxy
+
 > If your device does not have NPM commands, you can copy node_modules to your device after installing the dependencies on the device that can run NPM commands.
 
 # Address and Channel Menu After Proxy
@@ -30,6 +35,14 @@ node index.js
 成都影视,http://localhost:5050/cdtv4/index.flv
 成都公共,http://localhost:5050/cdtv5/index.flv
 成都少儿,http://localhost:5050/cdtv6/index.flv
+
+成都新闻,http://localhost:5050/cdtv1/index.m3u8
+成都经济,http://localhost:5050/cdtv2/index.m3u8
+成都都市,http://localhost:5050/cdtv3/index.m3u8
+成都影视,http://localhost:5050/cdtv4/index.m3u8
+成都公共,http://localhost:5050/cdtv5/index.m3u8
+成都少儿,http://localhost:5050/cdtv6/index.m3u8
+
 重庆卫视,http://localhost:5050/cqtv1/index.m3u8
 重庆新闻,http://localhost:5050/cqtv3/index.m3u8
 重庆睛彩,http://localhost:5050/cqtv4/index.m3u8
@@ -49,6 +62,7 @@ node index.js
 > Replace the `localhost` string above with the actual IP address of your device
 
 # Change Logs
+- 2019-4-16 fix sctv refere header,support cdtv m3u8(0.0.8)
 - 2019-2-12 fix bug,hand error
 - 2019-2-11 change cdtv proxy channel suffix,cache sctv proxy channel latest three ts file(0.0.6)
 - 2019-1-8 add cqtv/sctv/cdtv(0.0.1)
