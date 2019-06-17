@@ -236,7 +236,8 @@ async function cqtv(req, res) {
   var headers = {
     //'Referer': 'http://www.cbg.cn/1ive/',
     //'Referer': 'http://www.cbg.cn/live/index.shtml',
-    'Referer': 'http://www.cbg.cn/live/Index.shtml',
+    'Referer': 'http://www.cbg.cn/live/Index.shtml,http://www.cbg.cn/live/lndex.shtml,http://www.cbg.cn/live/index.shtml',
+    //'Referer': 'http://www.cbg.cn/live/lndex.shtml',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3610.2 Safari/537.36'
   };
   var url = req.url;

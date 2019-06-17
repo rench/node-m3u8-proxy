@@ -63,6 +63,7 @@ node-m3u8-proxy
 > Replace the `localhost` string above with the actual IP address of your device
 
 # Change Logs
+- 2019-6-17 fix cqtv referer header(0.0.10)
 - 2019-4-28 fix cqtv referer header(0.0.9)
 - 2019-4-16 fix sctv referer header,support cdtv m3u8(0.0.8)
 - 2019-2-12 fix bug,hand error
