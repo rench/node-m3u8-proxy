@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/rench/node-m3u8-proxy#readme",
   "dependencies": {
-    "got": "^9.5.0"
+    "got": "^11.8.5"
   }
 }
